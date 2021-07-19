@@ -38,21 +38,14 @@ export function fetchPostContent(): PostContent[] {
         date: string;
         title: string;
         tags: string[];
-        slug: string;
         fullPath: string,
       };
       matterData.fullPath = fullPath;
 
       const slug = fileName.replace(/\.mdx$/, "");
 
-      // Validate slug string
-      if (matterData.slug !== slug) {
-        throw new Error(
-          "slug field not match with the path of its content source"
-        );
-      }
 
-      return matterData;
+      return {...matterData, slug};
     });
   // Sort posts by date
   postCache = allPostsData.sort((a, b) => {
